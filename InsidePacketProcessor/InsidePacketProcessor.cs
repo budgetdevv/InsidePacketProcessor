@@ -86,23 +86,6 @@ namespace InsideUtilities
             return typeof(T).FullName.GetHashCode();
         }
 
-        [ProtoContract(SkipConstructor = true)]
-        private class FooClass
-        {
-            [ProtoMember(1)]
-            public int Int { get; set; }
-
-            [ProtoMember(2)]
-            public ulong Ulong { get; set; }
-
-            public FooClass(int _Int, ulong _Ulong)
-            {
-                Int = _Int;
-
-                Ulong = _Ulong;
-            }
-        }
-        
         public void SubscribeToTypeReusable<T>(PacketProcessorAct<T> Act) where T: class
         {
             var Hash = GetHashFromType<T>();
