@@ -131,6 +131,12 @@ namespace InsideUtilities
                 throw new Exception($"Cannot unsubscribe type of {typeof(T).FullName} if it wasn't Subscribed to!");
             }
         }
+        
+        [MethodImpl(InlineAndOptimize)]
+        public void UnsubAllTypes()
+        {
+            Dict.Clear();
+        }
 
         public void Dispose()
         {
