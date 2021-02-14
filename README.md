@@ -45,4 +45,6 @@ A serializer that automatically deserializes a Stream to the correct type! Uses 
 
 - UnsubType<T>(): Unsubscribes the type, and consequentially, previously subscribed anonymous function would no longer be invoked on deserialization of the type.
   
+- UnsubAllTypes(): Unsubscribes all subscribed types!
+  
 - Dispose(): Release ALL resources used by the Processor! It is paramount to call this after you're done using the Processor to prevent memory leaks!
