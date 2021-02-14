@@ -1,7 +1,11 @@
 # InsidePacketProcessor
 A serializer that automatically deserializes a Stream to the correct type! Uses protobuf-net internally.
 
-Note: As it uses protobuf-net internally, you will have to include the appropriate attributes inside the class / struct you're registering! More info can be found @ https://github.com/protobuf-net/protobuf-net ! Examples can be found in Tests/Test c;
+# Notes 
+
+- As it uses protobuf-net internally, you will have to include the appropriate attributes inside the class / struct you're registering! More info can be found @ https://github.com/protobuf-net/protobuf-net ! Examples can be found in Tests/Test c;
+
+- As InsidePacketProcessor is a struct, it is passed by copy by default! This is however not a huge issue ( Usability wise ), as the processor does not rely on any internal state that would be desynced by copying!
 
 # Notable features include
 
@@ -11,8 +15,11 @@ Note: As it uses protobuf-net internally, you will have to include the appropria
 
 - Easy to use! Just register the appropriate type with .SubscribeToType<T>() or its reusable variant!
   
-  
 # APIs:
+
+- InsidePacketProcessor.Create(int InitSize = 10): Instantiates an instance of the Processor!
+
+  InitSize: The initial size of Processor! This should ideally be the number of types you plan to subscribe to, though it is fine if the subscription count exceeds the initial size...resizing just happens!
 
 - Serialize<T>(ref T Item, Stream Stream, int WriteIndex = 0): Attempt to serialize a specific class / struct into a Stream
   
@@ -37,3 +44,5 @@ Note: As it uses protobuf-net internally, you will have to include the appropria
   PacketProcessorAct<T> Act: The anonymous function!
 
 - UnsubType<T>(): Unsubscribes the type, and consequentially, previously subscribed anonymous function would no longer be invoked on deserialization of the type.
+  
+- Dispose(): Release ALL resources used by the Processor! It is paramount to call this after you're done using the Processor to prevent memory leaks!
