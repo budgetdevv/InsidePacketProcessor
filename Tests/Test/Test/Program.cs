@@ -46,6 +46,13 @@ namespace Test
         
         static void Main(string[] args)
         {
+            //Test1();
+
+            Test2();
+        }
+
+        private static void Test1()
+        {
             IPP = InsidePacketProcessor.CreateProcessor();
 
             var MS = new MemoryStream(1000);
@@ -75,7 +82,45 @@ namespace Test
             IPP.Deserialize(MS, 500);
             
             IPP.Deserialize(MS, 500);
+            
+            IPP.UnsubType<FooClass>();
 
+            Console.WriteLine("After Unsub");
+            
+            IPP.Deserialize(MS, 0);
+            
+            IPP.Deserialize(MS, 500); //This shouldn't run!
+        }
+        
+        private static void Test2()
+        {
+            IPP = InsidePacketProcessor.CreateProcessor();
+
+            var MS = new MemoryStream(1000);
+
+            var FooStruct = new FooStruct(69, 1258);
+            
+            var FooClass = new FooClass(69, 1258);
+
+            IPP.Serialize(ref FooStruct, MS, 0);
+            
+            IPP.Serialize(ref FooClass, MS, 500);
+
+            IPP.SubscribeToType((ref FooStruct x) =>
+            {
+                Console.WriteLine($"FooStruct! {x.Int} | {x.Ulong}");
+            });
+            
+            //This is commented out, and hence nothing should happen!
+            
+            // IPP.SubscribeToTypeReusable((ref FooClass x) =>
+            // {
+            //     Console.WriteLine($"FooClass! {x.Int} | {x.Ulong}");
+            // });
+
+            IPP.Deserialize(MS, 0);
+            
+            IPP.Deserialize(MS, 500); //This shouldn't run!
         }
     }
 }
