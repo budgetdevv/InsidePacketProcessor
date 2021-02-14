@@ -1,7 +1,7 @@
 # InsidePacketProcessor
 A serializer that automatically deserializes a Stream to the correct type! Uses protobuf-net internally.
 
-Note: As it uses protobuf-net internally, you will have to include the appropriate attributes inside the class / struct you're registering! More info can be found @ https://github.com/protobuf-net/protobuf-net !
+Note: As it uses protobuf-net internally, you will have to include the appropriate attributes inside the class / struct you're registering! More info can be found @ https://github.com/protobuf-net/protobuf-net ! Examples can be found in Tests/Test c;
 
 # Notable features include
 
