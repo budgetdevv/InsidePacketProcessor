@@ -1,0 +1,81 @@
+﻿using System;
+using System.IO;
+using InsideUtilities;
+using ProtoBuf;
+
+namespace Test
+{
+    class Program
+    {
+        private static InsidePacketProcessor IPP;
+        
+        [ProtoContract]
+        private struct FooStruct
+        {
+            [ProtoMember(1)]
+            public int Int { get; set; }
+
+            [ProtoMember(2)]
+            public ulong Ulong { get; set; }
+
+            public FooStruct(int _Int, ulong _Ulong)
+            {
+                Int = _Int;
+
+                Ulong = _Ulong;
+            }
+        }
+        
+
+        [ProtoContract]
+        private class FooClass
+        {
+            [ProtoMember(1)]
+            public int Int { get; set; }
+
+            [ProtoMember(2)]
+            public ulong Ulong { get; set; }
+
+            public FooClass(int _Int, ulong _Ulong)
+            {
+                Int = _Int;
+
+                Ulong = _Ulong;
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            IPP = InsidePacketProcessor.CreateProcessor();
+
+            var MS = new MemoryStream(1000);
+
+            var FooStruct = new FooStruct(69, 1258);
+            
+            var FooClass = new FooClass(69, 1258);
+
+            IPP.Serialize(ref FooStruct, MS, 0);
+            
+            IPP.Serialize(ref FooClass, MS, 500);
+
+            IPP.SubscribeToType((ref FooStruct x) =>
+            {
+                Console.WriteLine($"FooStruct! {x.Int} | {x.Ulong}");
+            });
+            
+            IPP.SubscribeToTypeReusable((ref FooClass x) =>
+            {
+                Console.WriteLine($"FooClass! {x.Int} | {x.Ulong}");
+            });
+            
+            IPP.Deserialize(MS, 0);
+            
+            IPP.Deserialize(MS, 0);
+            
+            IPP.Deserialize(MS, 500);
+            
+            IPP.Deserialize(MS, 500);
+
+        }
+    }
+}
