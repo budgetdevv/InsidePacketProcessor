@@ -62,7 +62,7 @@ namespace InsideUtilities
         {
             Stream.Position = ReadIndex;
 
-            ReadTypeDefAndGetAct(Stream).Invoke(Stream);
+            ReadTypeDefAndGetAct(Stream)?.Invoke(Stream);
         }
         
         [MethodImpl(InlineAndOptimize)]
@@ -124,8 +124,7 @@ namespace InsideUtilities
         
         public void SubscribeToType<T>(PacketProcessorAct<T> Act)
         {
-            // ReSharper disable once PossibleNullReferenceException
-            var Hash = typeof(T).FullName.GetHashCode();
+            var Hash = GetHashFromType<T>();
 
             var Success = Dict.TryAdd(Hash, Stream =>
             {
@@ -137,6 +136,16 @@ namespace InsideUtilities
             if (!Success)
             {
                 throw new Exception($"Type of {typeof(T).FullName} is already registered! Consider Unsubscribing!");
+            }
+        }
+        
+        public void UnsubType<T>()
+        {
+            var Hash = GetHashFromType<T>();
+
+            if (!Dict.Remove(Hash))
+            {
+                throw new Exception($"Cannot unsubscribe type of {typeof(T).FullName} if it wasn't Subscribed to!");
             }
         }
 
