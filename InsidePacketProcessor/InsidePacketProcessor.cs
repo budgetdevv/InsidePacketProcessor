@@ -37,9 +37,16 @@ namespace InsideUtilities
 
             TypeDefGCHandle = GCHandle.Alloc(Arr, GCHandleType.Pinned);
         }
+        
+        
+        [MethodImpl(InlineAndOptimize)]
+        public void Serialize<T>(ref T Item, Stream Stream)
+        {
+            Serialize(ref Item, Stream, Stream.Position);
+        }
 
         [MethodImpl(InlineAndOptimize)]
-        public void Serialize<T>(ref T Item, Stream Stream, int WriteIndex = 0)
+        public void Serialize<T>(ref T Item, Stream Stream, long WriteIndex)
         {
             Stream.Position = WriteIndex;
 
@@ -58,7 +65,13 @@ namespace InsideUtilities
         }
         
         [MethodImpl(InlineAndOptimize)]
-        public void Deserialize(Stream Stream, int ReadIndex = 0)
+        public void Deserialize(Stream Stream)
+        {
+            Deserialize(Stream, Stream.Position);
+        }
+        
+        [MethodImpl(InlineAndOptimize)]
+        public void Deserialize(Stream Stream, long ReadIndex)
         {
             Stream.Position = ReadIndex;
 
