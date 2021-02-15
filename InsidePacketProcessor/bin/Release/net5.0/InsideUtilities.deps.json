@@ -1,0 +1,59 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "InsideUtilities/1.0.0": {
+        "dependencies": {
+          "protobuf-net": "3.0.73"
+        },
+        "runtime": {
+          "InsideUtilities.dll": {}
+        }
+      },
+      "protobuf-net/3.0.73": {
+        "dependencies": {
+          "protobuf-net.Core": "3.0.73"
+        },
+        "runtime": {
+          "lib/net5.0/protobuf-net.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.73.29921"
+          }
+        }
+      },
+      "protobuf-net.Core/3.0.73": {
+        "runtime": {
+          "lib/net5.0/protobuf-net.Core.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.73.29921"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "InsideUtilities/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "protobuf-net/3.0.73": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rcqDbIs7bmsctQk7Jo0zAI5BBDyjlKqzGqCHbtlHKRDyJ5AFPBClS3G5KvITS52hSoobUTWW5NsUmB7Dt/0iaA==",
+      "path": "protobuf-net/3.0.73",
+      "hashPath": "protobuf-net.3.0.73.nupkg.sha512"
+    },
+    "protobuf-net.Core/3.0.73": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UKQlQY4STocSar2WoGA2mJegx3E4rTOa+ur2O8YKmhpJII/VfLILkVAF7Cyko2qljFAZ0CuOTy5uNu5JE/ZQ2A==",
+      "path": "protobuf-net.core/3.0.73",
+      "hashPath": "protobuf-net.core.3.0.73.nupkg.sha512"
+    }
+  }
+}

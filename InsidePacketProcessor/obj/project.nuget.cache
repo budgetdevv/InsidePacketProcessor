@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "DP6Qbtu1yOkZtUWKC31UtlgKjnZDYqNgDx/+J7H2QVBD9Inc130dTntnQaxK8eKBddagW9KWotcxkSHDGN5Ffw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Administrator\\Desktop\\Code\\InsidePacketProcessor\\InsidePacketProcessor\\InsidePacketProcessor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\protobuf-net\\3.0.73\\protobuf-net.3.0.73.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\protobuf-net.core\\3.0.73\\protobuf-net.core.3.0.73.nupkg.sha512"
+  ],
+  "logs": []
+}

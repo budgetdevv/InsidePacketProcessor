@@ -1,0 +1,12 @@
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\bin\Release\net5.0\InsideUtilities.deps.json
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\bin\Release\net5.0\InsideUtilities.dll
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\bin\Release\net5.0\ref\InsideUtilities.dll
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\bin\Release\net5.0\InsideUtilities.pdb
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\obj\Release\net5.0\InsidePacketProcessor.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\obj\Release\net5.0\InsidePacketProcessor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\obj\Release\net5.0\InsidePacketProcessor.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\obj\Release\net5.0\InsidePacketProcessor.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\obj\Release\net5.0\InsidePacketProcessor.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\obj\Release\net5.0\InsideUtilities.dll
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\obj\Release\net5.0\ref\InsideUtilities.dll
+C:\Users\Administrator\Desktop\Code\InsidePacketProcessor\InsidePacketProcessor\obj\Release\net5.0\InsideUtilities.pdb

@@ -7,7 +7,7 @@ using ProtoBuf;
 
 namespace InsideUtilities
 {
-    public readonly unsafe struct InsidePacketProcessor: IDisposable
+    public readonly unsafe partial struct InsidePacketProcessor: IDisposable
     {
         private readonly Dictionary<int, Action<Stream>> Dict;
 
@@ -36,13 +36,26 @@ namespace InsideUtilities
             }
 
             TypeDefGCHandle = GCHandle.Alloc(Arr, GCHandleType.Pinned);
+
+            //MS = Unsafe.As<UnmanagedMemoryStream>(RuntimeHelpers.GetUninitializedObject(typeof(UnmanagedMemoryStream)));
         }
-        
+
+        [MethodImpl(InlineAndOptimize)]
+        public void Serialize<T>(T Item, Stream Stream)
+        {
+            Serialize(ref Item, Stream, Stream.Position);
+        }
         
         [MethodImpl(InlineAndOptimize)]
         public void Serialize<T>(ref T Item, Stream Stream)
         {
             Serialize(ref Item, Stream, Stream.Position);
+        }
+        
+        [MethodImpl(InlineAndOptimize)]
+        public void Serialize<T>(T Item, Stream Stream, long WriteIndex)
+        {
+            Serialize(ref Item, Stream, WriteIndex);
         }
 
         [MethodImpl(InlineAndOptimize)]
@@ -157,5 +170,10 @@ namespace InsideUtilities
             
             Handle.Free();
         }
+    }
+
+    public partial struct InsidePacketProcessor
+    {
+        //Helper methods
     }
 }
