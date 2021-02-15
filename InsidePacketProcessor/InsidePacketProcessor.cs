@@ -38,11 +38,22 @@ namespace InsideUtilities
             TypeDefGCHandle = GCHandle.Alloc(Arr, GCHandleType.Pinned);
         }
         
+        [MethodImpl(InlineAndOptimize)]
+        public void Serialize<T>(T Item, Stream Stream)
+        {
+            Serialize(ref Item, Stream, Stream.Position);
+        }
         
         [MethodImpl(InlineAndOptimize)]
         public void Serialize<T>(ref T Item, Stream Stream)
         {
             Serialize(ref Item, Stream, Stream.Position);
+        }
+        
+        [MethodImpl(InlineAndOptimize)]
+        public void Serialize<T>(T Item, Stream Stream, long WriteIndex)
+        {
+            Serialize(ref Item, Stream, WriteIndex);
         }
 
         [MethodImpl(InlineAndOptimize)]
