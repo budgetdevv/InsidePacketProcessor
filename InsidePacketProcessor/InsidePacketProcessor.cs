@@ -15,8 +15,6 @@ namespace InsideUtilities
 
         private readonly GCHandle TypeDefGCHandle;
         
-        private const MethodImplOptions InlineAndOptimize = MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization;
-
         public delegate void PacketProcessorAct<T>(ref T Item);
         
         public static InsidePacketProcessor CreateProcessor(int InitialSize = 10)
@@ -38,25 +36,25 @@ namespace InsideUtilities
             TypeDefGCHandle = GCHandle.Alloc(Arr, GCHandleType.Pinned);
         }
         
-        [MethodImpl(InlineAndOptimize)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Serialize<T>(T Item, Stream Stream)
         {
             Serialize(ref Item, Stream, Stream.Position);
         }
         
-        [MethodImpl(InlineAndOptimize)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Serialize<T>(ref T Item, Stream Stream)
         {
             Serialize(ref Item, Stream, Stream.Position);
         }
         
-        [MethodImpl(InlineAndOptimize)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Serialize<T>(T Item, Stream Stream, long WriteIndex)
         {
             Serialize(ref Item, Stream, WriteIndex);
         }
 
-        [MethodImpl(InlineAndOptimize)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Serialize<T>(ref T Item, Stream Stream, long WriteIndex)
         {
             Stream.Position = WriteIndex;
@@ -66,7 +64,7 @@ namespace InsideUtilities
             Serializer.SerializeWithLengthPrefix(Stream, Item, PrefixStyle.Base128);
         }
 
-        [MethodImpl(InlineAndOptimize)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void WriteTypeDef<T>(Stream Stream)
         {
             // ReSharper disable once PossibleNullReferenceException
@@ -75,21 +73,19 @@ namespace InsideUtilities
             Stream.Write(new Span<byte>(TypeDefBuffer, 4));
         }
         
-        [MethodImpl(InlineAndOptimize)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Deserialize(Stream Stream)
         {
             Deserialize(Stream, Stream.Position);
         }
         
-        [MethodImpl(InlineAndOptimize)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Deserialize(Stream Stream, long ReadIndex)
         {
             Stream.Position = ReadIndex;
 
             ReadTypeDefAndGetAct(Stream)?.Invoke(Stream);
         }
-        
-        [MethodImpl(InlineAndOptimize)]
         private Action<Stream> ReadTypeDefAndGetAct(Stream Stream)
         {
             var TypeBufferSpan = new Span<byte>(TypeDefBuffer, 4);
@@ -103,11 +99,26 @@ namespace InsideUtilities
             return Act;
         }
 
-        [MethodImpl(InlineAndOptimize)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int GetHashFromType<T>()
         {
             // ReSharper disable once PossibleNullReferenceException
-            return typeof(T).FullName.GetHashCode();
+            var Str = typeof(T).FullName;
+            
+            unchecked
+            {
+                int Hash = 23;
+
+                // ReSharper disable once ForCanBeConvertedToForeach
+                for (int I = 0; I < Str.Length; I++)
+                {
+                    Hash *= 31;
+
+                    Hash += Str[I];
+                }
+                
+                return Hash;
+            }
         }
 
         public void SubscribeToTypeReusable<T>(PacketProcessorAct<T> Act) where T: class
@@ -156,7 +167,7 @@ namespace InsideUtilities
             }
         }
         
-        [MethodImpl(InlineAndOptimize)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void UnsubAllTypes()
         {
             Dict.Clear();
